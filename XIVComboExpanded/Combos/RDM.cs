@@ -133,7 +133,7 @@ namespace XIVComboExpandedestPlugin.Combos
                         return OriginalHook(RDM.Redoublement);
                 }
 
-                if (IsEnabled(CustomComboPreset.RedMageMeleeComboPlus))
+                if (IsEnabled(CustomComboPreset.RedMageMeleeComboPlus) || IsEnabled(CustomComboPreset.RedMageMeleeComboPlusPlus))
                 {
                     if ((lastComboMove == RDM.Verflare || lastComboMove == RDM.Verholy) && level >= RDM.Levels.Scorch)
                         return RDM.Scorch;

@@ -109,7 +109,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if ((actionID == RPR.Slice && !IsEnabled(CustomComboPreset.ReaperInfernalSliceCombo)) || (actionID == RPR.InfernalSlice && IsEnabled(CustomComboPreset.ReaperInfernalSliceCombo)))
+            if (actionID == (IsEnabled(CustomComboPreset.ReaperInfernalSliceCombo) ? RPR.InfernalSlice : RPR.Slice))
             {
                 var gauge = GetJobGauge<RPRGauge>();
 
@@ -157,7 +157,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if ((actionID == RPR.SpinningScythe && !IsEnabled(CustomComboPreset.ReaperNightmareScytheCombo)) || (actionID == RPR.NightmareScythe && IsEnabled(CustomComboPreset.ReaperNightmareScytheCombo)))
+            if (actionID == (IsEnabled(CustomComboPreset.ReaperNightmareScytheCombo) ? RPR.NightmareScythe : RPR.SpinningScythe))
             {
                 var gauge = GetJobGauge<RPRGauge>();
 
