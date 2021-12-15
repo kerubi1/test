@@ -450,10 +450,20 @@ namespace XIVComboExpandedestPlugin
         RedMageMeleeCombo = 3502,
 
         [OrderedEnum]
+        [ParentCombo(RedMageMeleeCombo)]
+        [CustomComboInfo("Redoublement Combo Plus", "Replaces Redoublement/Moulinet with the combo spells after you have gained 3 mana stacks.\nVerflare will always be picked, meaning you must still manually press Verholy if appropriate.", RDM.JobID, RDM.Redoublement, RDM.Moulinet)]
+        RedMageMeleeComboPlus = 3508,
+
+        [OrderedEnum]
+        [ParentCombo(RedMageMeleeComboPlus)]
+        [CustomComboInfo("Redoublement Combo Plus Verholy Swap", "Swaps Verflare with Verholy in your melee combo (unless you aren't at a level you can use it).", RDM.JobID, RDM.Redoublement, RDM.Moulinet)]
+        RedMageMeleeComboPlusVerholy = 3509,
+
+        [OrderedEnum]
         [SecretCustomCombo]
         [ParentCombo(RedMageMeleeCombo)]
-        [CustomComboInfo("Redoublement Combo Plus", "Replaces Redoublement/Moulinet with Verflare/Verholy after 3 stacks, whichever is more appropriate.", RDM.JobID, RDM.Redoublement, RDM.Moulinet)]
-        RedMageMeleeComboPlus = 3503,
+        [CustomComboInfo("Redoublement Combo Plus Plus", "Replaces Redoublement/Moulinet with the combo spells after you have gained 3 mana stacks.\nVerflare or Verholy will be picked, whichever is more appropriate.", RDM.JobID, RDM.Redoublement, RDM.Moulinet)]
+        RedMageMeleeComboPlusPlus = 3503,
 
         [OrderedEnum]
         [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available.", RDM.JobID, RDM.Verstone, RDM.Verfire)]
