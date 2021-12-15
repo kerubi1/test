@@ -13,6 +13,7 @@ namespace XIVComboExpandedestPlugin.Combos
             Maim = 37,
             Berserk = 38,
             InnerRelease = 7389,
+            Upheaval = 7387,
             Overpower = 41,
             StormsPath = 42,
             StormsEye = 45,
@@ -28,12 +29,15 @@ namespace XIVComboExpandedestPlugin.Combos
             InnerChaos = 16465,
             PrimalRend = 25753;
 
+
+
         public static class Buffs
         {
             public const ushort
                 InnerRelease = 1177,
                 NascentChaos = 1897,
-                PrimalRendReady = 2624;
+                PrimalRendReady = 2624,
+                SurgingTempest = 2677;
         }
 
         public static class Debuffs
@@ -204,6 +208,74 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (HasEffect(WAR.Buffs.PrimalRendReady))
                 return WAR.PrimalRend;
+
+            return actionID;
+        }
+    }
+    
+    // Replace Storm's Path with Storm's Path combo and overcap feature on main combo to fellcleave
+    internal class WarriorStormsDotCombo : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.WarriorStormsDotCombo;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == WAR.StormsPath)
+            {
+                var heavyswingCD = GetCooldown(WAR.HeavySwing);
+                var upheavalCD = GetCooldown(WAR.Upheaval);
+                var innerreleaseCD = GetCooldown(WAR.InnerRelease);
+                var beserkCD = GetCooldown(WAR.Berserk);
+                var stormseyeBuff = FindEffectAny(WAR.Buffs.SurgingTempest);
+                var innerReleaseBuff = HasEffect(WAR.Buffs.InnerRelease);
+                if (comboTime > 0)
+                {
+                    var gauge = GetJobGauge<WARGauge>().BeastGauge;
+                    if (lastComboMove == WAR.Maim && level >= 50 && !HasEffectAny(WAR.Buffs.SurgingTempest))
+                        return WAR.StormsEye;
+                    if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
+                    {
+                        if (gauge == 100 && IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature) && level >= 54)
+                        {
+                            return WAR.FellCleave;
+                        }
+
+                        return WAR.Maim;
+                    }
+
+                    if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
+                    {
+                        if (gauge >= 90 && IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature) && level >= 54)
+                        {
+                            return WAR.FellCleave;
+                        }
+
+                        if (stormseyeBuff.RemainingTime < 10 && IsEnabled(CustomComboPreset.WarriorStormsEyeCombo) && level >= 50)
+                            return WAR.StormsEye;
+                        return WAR.StormsPath;
+                    }
+                }
+
+                return WAR.HeavySwing;
+            }
+
+            return actionID;
+        }
+    }
+    internal class WarriorPrimalCycloneFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.WarriorPrimalCycloneFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == WAR.InnerBeast || actionID == WAR.SteelCyclone)
+            {
+                if (level >= WAR.Levels.PrimalRend && HasEffect(WAR.Buffs.PrimalRendReady))
+                    return WAR.PrimalRend;
+
+                // Fell Cleave or Decimate
+                return OriginalHook(actionID);
+            }
 
             return actionID;
         }

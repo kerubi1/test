@@ -651,6 +651,13 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Primal Rend Feature", "Replace Inner Release with Primal Rend when available.", WAR.JobID, WAR.Berserk, WAR.InnerRelease)]
         WarriorPrimalRendFeature = 2108,
 
+        [OrderedEnum]
+        [CustomComboInfo("Storms Dot Combo", "AIO Single Target Combo with Storms Eye at a 10 sec refresh", WAR.JobID, WAR.StormsPath)]
+        WarriorStormsDotCombo = 2109,
+
+        [CustomComboInfo("Primal Cyclone Feature", "Replace Inner Beast and Steel Cyclone with Primal Rend when available (Also added onto Main AoE combo)", WAR.JobID, WAR.PrimalRend, WAR.InnerBeast, WAR.SteelCyclone)]
+        WarriorPrimalCycloneFeature = 2110,
+
         #endregion
         // ====================================================================================
         #region WHITE MAGE
