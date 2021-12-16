@@ -1,4 +1,6 @@
-﻿namespace XIVComboExpandedestPlugin.Combos
+﻿using Dalamud.Game.ClientState.JobGauge.Types;
+
+namespace XIVComboExpandedestPlugin.Combos
 {
     internal static class SGE
     {
@@ -11,6 +13,7 @@
             Egeiro = 24287,
             Kardia = 24285,
             Soteria = 24294,
+            Toxikon = 24304,
             Phlegma = 24289,
             Phlegmara = 24307,
             Phlegmaga = 24313,
@@ -57,6 +60,29 @@
                     return SGE.Soteria;
                 return SGE.Kardia;
             }
+
+            return actionID;
+        }
+    }
+
+    internal class SagePhlegmaToxicBalls : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.SagePhlegmaToxicBalls;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            var gauge = GetJobGauge<SGEGauge>();
+
+            if (level >= SGE.Levels.Dosis3)
+                if (GetCooldown(SGE.Phlegmaga).CooldownRemaining > 45 && gauge.Addersting > 0)
+                    return OriginalHook(SGE.Toxikon);
+
+            if (level >= SGE.Levels.Dosis2)
+                if (GetCooldown(SGE.Phlegmara).CooldownRemaining > 45 && gauge.Addersting > 0)
+                    return OriginalHook(SGE.Toxikon);
+
+            if (GetCooldown(SGE.Phlegma).CooldownRemaining > 45 && gauge.Addersting > 0)
+                return OriginalHook(SGE.Toxikon);
 
             return actionID;
         }

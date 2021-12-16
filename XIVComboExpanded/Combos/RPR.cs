@@ -16,6 +16,7 @@ namespace XIVComboExpandedestPlugin.Combos
             Gallows = 24383,
             ShadowOfDeath = 24378,
             BloodStalk = 24389,
+            Gluttony = 24393,
             // AoE
             SpinningScythe = 24376,
             NightmareScythe = 24377,
@@ -57,6 +58,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 SpinningScythe = 25,
                 InfernalSlice = 30,
                 NightmareScythe = 45,
+                Gluttony = 76,
                 Enshroud = 80,
                 PlentifulHarvest = 88,
                 Communio = 90;
@@ -253,6 +255,32 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 return RPR.Regress;
             }
+
+            return actionID;
+        }
+    }
+
+    internal class ReaperBloodStalkFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.ReaperBloodStalkFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (IsActionOffCooldown(RPR.Gluttony) && level >= RPR.Levels.Gluttony && !HasEffect(RPR.Buffs.Enshrouded))
+                return RPR.Gluttony;
+
+            return actionID;
+        }
+    }
+
+    internal class ReaperGrimSwatheFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.ReaperGrimSwatheFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (IsActionOffCooldown(RPR.Gluttony) && level >= RPR.Levels.Gluttony && !HasEffect(RPR.Buffs.Enshrouded))
+                return RPR.Gluttony;
 
             return actionID;
         }
