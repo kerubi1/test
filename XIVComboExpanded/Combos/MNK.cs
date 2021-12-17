@@ -104,7 +104,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (IsEnabled(CustomComboPreset.MnkBootshineFeature))
                 {
-                    if (level >= MNK.DragonKick)
+                    if (level >= MNK.Levels.DragonKick)
                         return MNK.DragonKick;
 
                     return MNK.Bootshine;
@@ -157,6 +157,8 @@ namespace XIVComboExpandedestPlugin.Combos
                     case MNK.PerfectBalance:
                         return MNK.Demolish;
                     case MNK.FormShift:
+                        if (!IsEnabled(CustomComboPreset.MnkBootshineFeature))
+                            return MNK.Bootshine;
                         return MNK.SnapPunch;
                 }
             }

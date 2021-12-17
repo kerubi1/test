@@ -10,6 +10,8 @@ namespace XIVComboExpandedestPlugin.Combos
         public const uint
             Verthunder = 7505,
             Veraero = 7507,
+            Verthunder3 = 25855,
+            Veraero3 = 25856,
             Veraero2 = 16525,
             Verthunder2 = 16524,
             Impact = 16526,
@@ -201,6 +203,22 @@ namespace XIVComboExpandedestPlugin.Combos
             }
 
             return actionID;
+        }
+
+        internal class RedMageVeraeroVerThunderScorchFeature : CustomCombo
+        {
+            protected override CustomComboPreset Preset => CustomComboPreset.RedMageVeraeroVerThunderScorchFeature;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                if (level >= RDM.Levels.Resolution && lastComboMove == RDM.Scorch)
+                    return RDM.Resolution;
+
+                if (level >= RDM.Levels.Scorch && (lastComboMove == RDM.Verflare || lastComboMove == RDM.Verholy))
+                    return RDM.Scorch;
+
+                return actionID;
+            }
         }
     }
 }
