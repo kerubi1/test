@@ -80,9 +80,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 {
                     if (IsEnabled(CustomComboPreset.MnkBootshineFeature))
                     {
-                        if (HasEffect(MNK.Buffs.LeadenFist) || level < MNK.Levels.DragonKick)
-                            return MNK.Bootshine;
-                        return MNK.DragonKick;
+                        return HasEffect(MNK.Buffs.LeadenFist) || level < MNK.Levels.DragonKick ? MNK.Bootshine : MNK.DragonKick;
                     }
 
                     return actionID == MNK.TrueStrike ? MNK.Bootshine : MNK.DragonKick;
@@ -104,10 +102,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (IsEnabled(CustomComboPreset.MnkBootshineFeature))
                 {
-                    if (level >= MNK.Levels.DragonKick)
-                        return MNK.DragonKick;
-
-                    return MNK.Bootshine;
+                    return level >= MNK.Levels.DragonKick ? MNK.DragonKick : MNK.Bootshine;
                 }
 
                 return actionID == MNK.TrueStrike ? MNK.Bootshine : MNK.DragonKick;
@@ -121,9 +116,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (actionID == MNK.PerfectBalance)
                 {
-                    if (HasEffect(MNK.Buffs.LeadenFist))
-                        return MNK.Bootshine;
-                    return MNK.DragonKick;
+                    return HasEffect(MNK.Buffs.LeadenFist) ? MNK.Bootshine : MNK.DragonKick;
                 }
 
                 switch (pb.StackCount)
@@ -131,9 +124,7 @@ namespace XIVComboExpandedestPlugin.Combos
                     case 3:
                         if (IsEnabled(CustomComboPreset.MnkBootshineFeature))
                         {
-                            if (HasEffect(MNK.Buffs.LeadenFist))
-                                return MNK.Bootshine;
-                            return MNK.DragonKick;
+                            return HasEffect(MNK.Buffs.LeadenFist) ? MNK.Bootshine : MNK.DragonKick;
                         }
 
                         return actionID == MNK.TrueStrike ? MNK.Bootshine : MNK.DragonKick;
@@ -149,17 +140,21 @@ namespace XIVComboExpandedestPlugin.Combos
                 switch (actionID)
                 {
                     case MNK.TrueStrike:
-                        if (HasEffect(MNK.Buffs.LeadenFist) && IsEnabled(CustomComboPreset.MnkBootshineFeature))
-                            return MNK.Bootshine;
-                        return MNK.DragonKick;
+                        return HasEffect(MNK.Buffs.LeadenFist) && IsEnabled(CustomComboPreset.MnkBootshineFeature) ? MNK.Bootshine : MNK.DragonKick;
                     case MNK.TwinSnakes:
                         return MNK.TwinSnakes;
                     case MNK.PerfectBalance:
                         return MNK.Demolish;
                     case MNK.FormShift:
-                        if (!IsEnabled(CustomComboPreset.MnkBootshineFeature))
-                            return MNK.Bootshine;
-                        return MNK.SnapPunch;
+                        if (!IsEnabled(CustomComboPreset.MonkAoEComboFormOption))
+                        {
+                            if (!IsEnabled(CustomComboPreset.MnkBootshineFeature))
+                                return MNK.Bootshine;
+                            if (!IsEnabled(CustomComboPreset.MonkSTComboFormOption))
+                                return MNK.SnapPunch;
+                        }
+
+                        break;
                 }
             }
 
@@ -173,11 +168,11 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if (actionID == MNK.FourPointFury && HasEffect(MNK.Buffs.PerfectBalance))
+            if (actionID == (IsEnabled(CustomComboPreset.MonkAoEComboFormOption) ? MNK.FormShift : MNK.FourPointFury))
             {
                 Status? pb = FindEffect(MNK.Buffs.PerfectBalance);
 
-                if (pb != null)
+                if (pb != null && HasEffect(MNK.Buffs.PerfectBalance))
                 {
                     if (pb.StackCount == 3)
                         return OriginalHook(MNK.ArmOfTheDestroyer);
@@ -186,6 +181,9 @@ namespace XIVComboExpandedestPlugin.Combos
                     if (pb.StackCount == 1)
                         return MNK.Rockbreaker;
                 }
+
+                if (HasEffect(MNK.Buffs.FormlessFist))
+                    return MNK.FourPointFury;
             }
 
             if (actionID == MNK.MasterfulBlitz)

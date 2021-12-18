@@ -32,7 +32,7 @@ namespace XIVComboExpandedestPlugin
         AstrologianCardsOnDrawFeature = 3301,
 
         [OrderedEnum]
-        [CustomComboInfo("Play to Astrodyne", "Play becomes Astrodyne when you have 3 seals.", AST.JobID, AST.Play)]
+        [CustomComboInfo("Play to Astrodyne", "Play becomes Astrodyne when you have 3 seals.\nIf Draw to Play is enabled, Astrodyne replaces Draw on Play while Draw is on Cooldown.", AST.JobID, AST.Play)]
         AstrologianAstrodynePlayFeature = 3304,
 
         [OrderedEnum]
@@ -273,8 +273,20 @@ namespace XIVComboExpandedestPlugin
         MonkSTCombo = 2007,
 
         [OrderedEnum]
-        [CustomComboInfo("Monk AoE Combo", "Replaces Masterful Blitz (for bug reasons) with the AoE combo chain, or whatever your most damaging move is when Perfect Balance is active.\nFour-Point Fury becomes AoE combo chain in order of forms during Perfect Balance.\nMasterful Blitz replaces the AoE combo when you have 3 Beast Chakra.", MNK.JobID, MNK.MasterfulBlitz, MNK.FourPointFury)]
+        [ParentCombo(MonkSTCombo)]
+        [ConflictingCombos(MonkAoEComboFormOption)]
+        [CustomComboInfo("Monk Combos Form Shift Option", "Enabling this option makes it so that Form Shift does not turn into Snap Punch with the Monk Combos feature.", MNK.JobID, MNK.FormShift)]
+        MonkSTComboFormOption = 2008,
+
+        [OrderedEnum]
+        [CustomComboInfo("Monk AoE Combo", "Replaces Masterful Blitz (for bug reasons) with the AoE combo chain, or whatever your most damaging move is when Perfect Balance is active.\nFour-Point Fury becomes AoE combo chain in order of forms during Perfect Balance.\nMasterful Blitz replaces the AoE combo when you have 3 Beast Chakra.", MNK.JobID, MNK.MasterfulBlitz, MNK.FourPointFury, MNK.FormShift)]
         MonkAoECombo = 2001,
+
+        [OrderedEnum]
+        [ParentCombo(MonkAoECombo)]
+        [ConflictingCombos(MonkSTComboFormOption)]
+        [CustomComboInfo("Monk AoE Combo Form Shift Option", "Enabling this option has Form Shift turn into Four-Point Fury in Formless Fist, and 1-2-3 AoE combo in Perfect Balance.", MNK.JobID, MNK.FormShift)]
+        MonkAoEComboFormOption = 2009,
 
         // [OrderedEnum]
         // [ParentCombo(MonkAoECombo)]
@@ -519,6 +531,10 @@ namespace XIVComboExpandedestPlugin
         [OrderedEnum]
         [CustomComboInfo("Phlegma into Toxikon", "Phlegma turns into Toxikon if you are out of charges and have Addersting.\nThis is prioritized over Dyskrasia if the 'Phlegma into Dyskrasia' feature is enabled.", SGE.JobID, SGE.Phlegma, SGE.Phlegmara, SGE.Phlegmaga)]
         SagePhlegmaToxicBalls = 4003,
+
+        [OrderedEnum]
+        [CustomComboInfo("Taurochole into Druochole", "Replaces Taurochole with Druochole if the former is on cooldown.\nYou should probably still keep the latter on your bar for certain scenarios.", SGE.JobID, SGE.Taurochole)]
+        SageTauroDruoFeature = 4004,
 
         #endregion
         // ====================================================================================

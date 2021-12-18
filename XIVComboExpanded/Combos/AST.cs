@@ -58,7 +58,7 @@ namespace XIVComboExpandedestPlugin.Combos
             if (actionID == AST.Play)
             {
                 var gauge = GetJobGauge<ASTGauge>();
-                if (!gauge.ContainsSeal(SealType.NONE) && IsEnabled(CustomComboPreset.AstrologianAstrodynePlayFeature) && gauge.DrawnCard != CardType.NONE)
+                if (!gauge.ContainsSeal(SealType.NONE) && IsEnabled(CustomComboPreset.AstrologianAstrodynePlayFeature) && (gauge.DrawnCard != CardType.NONE || GetCooldown(AST.Draw).CooldownRemaining > 30))
                     return AST.Astrodyne;
 
                 if (HasEffect(AST.Buffs.Balance) || HasEffect(AST.Buffs.Bole) || HasEffect(AST.Buffs.Arrow) || HasEffect(AST.Buffs.Spear) || HasEffect(AST.Buffs.Ewer) || HasEffect(AST.Buffs.Spire))

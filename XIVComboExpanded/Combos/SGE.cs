@@ -10,6 +10,8 @@ namespace XIVComboExpandedestPlugin.Combos
             Diagnosis = 24284,
             Holos = 24310,
             Ixochole = 24299,
+            Taurochole = 24303,
+            Druochole = 24296,
             Egeiro = 24287,
             Kardia = 24285,
             Soteria = 24294,
@@ -104,6 +106,19 @@ namespace XIVComboExpandedestPlugin.Combos
 
             if (GetCooldown(SGE.Phlegma).CooldownRemaining > 45)
                 return OriginalHook(SGE.Dyskrasia);
+
+            return actionID;
+        }
+    }
+
+    internal class SageTauroDruoFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.SageTauroDruoFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (!IsActionOffCooldown(SGE.Taurochole) || level < SGE.Levels.Taurochole)
+                return SGE.Druochole;
 
             return actionID;
         }
