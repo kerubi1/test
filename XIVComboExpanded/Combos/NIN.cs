@@ -96,11 +96,11 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 if (IsEnabled(CustomComboPreset.NinjaArmorCrushRaijuFeature))
                 {
-                    if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.ForkedRaijuReady))
-                        return NIN.ForkedRaiju;
-
                     if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.FleetingRaijuReady))
                         return NIN.FleetingRaiju;
+
+                    if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.ForkedRaijuReady))
+                        return NIN.ForkedRaiju;
                 }
 
                 if (comboTime > 0)
@@ -129,11 +129,11 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 if (IsEnabled(CustomComboPreset.NinjaAeolianEdgeRaijuFeature))
                 {
-                    if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.ForkedRaijuReady))
-                        return NIN.ForkedRaiju;
-
                     if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.FleetingRaijuReady))
                         return NIN.FleetingRaiju;
+
+                    if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.ForkedRaijuReady))
+                        return NIN.ForkedRaiju;
                 }
 
                 if (comboTime > 0)
@@ -280,11 +280,11 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == NIN.Huraijin)
             {
-                if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.ForkedRaijuReady))
-                    return NIN.ForkedRaiju;
-
                 if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.FleetingRaijuReady))
                     return NIN.FleetingRaiju;
+
+                if (level >= NIN.Levels.ForkedRaiju && HasEffect(NIN.Buffs.ForkedRaijuReady))
+                    return NIN.ForkedRaiju;
             }
 
             return actionID;

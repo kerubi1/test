@@ -1,6 +1,6 @@
+using System;
 using System.Linq;
 
-using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Statuses;
 
@@ -112,6 +112,8 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 Status? pb = FindEffect(MNK.Buffs.PerfectBalance);
 
+                var gauge = new MyMNKGauge(GetJobGauge<MNKGauge>());
+
                 if (pb == null) return actionID;
 
                 if (actionID == MNK.PerfectBalance)
@@ -119,18 +121,24 @@ namespace XIVComboExpandedestPlugin.Combos
                     return HasEffect(MNK.Buffs.LeadenFist) ? MNK.Bootshine : MNK.DragonKick;
                 }
 
+                if (level < MNK.Levels.MasterfulBlitz)
+                {
+                    return actionID == MNK.TrueStrike ? MNK.Demolish : MNK.TwinSnakes;
+                }
+
                 switch (pb.StackCount)
                 {
                     case 3:
-                        if (IsEnabled(CustomComboPreset.MnkBootshineFeature))
-                        {
-                            return HasEffect(MNK.Buffs.LeadenFist) ? MNK.Bootshine : MNK.DragonKick;
-                        }
-
-                        return actionID == MNK.TrueStrike ? MNK.Bootshine : MNK.DragonKick;
+                        return actionID == MNK.TrueStrike ? MNK.Demolish : MNK.TwinSnakes;
                     case 2:
+                        if (gauge.BeastChakra.Contains(BeastChakra.RAPTOR))
+                            return actionID == MNK.TrueStrike ? MNK.SnapPunch : MNK.Demolish;
                         return actionID == MNK.TrueStrike ? MNK.TrueStrike : MNK.TwinSnakes;
                     case 1:
+                        if (!gauge.BeastChakra.Contains(BeastChakra.RAPTOR))
+                            return actionID == MNK.TrueStrike ? MNK.TrueStrike : MNK.TwinSnakes;
+                        if (gauge.BeastChakra.Contains(BeastChakra.RAPTOR) && gauge.BeastChakra.Contains(BeastChakra.COEURL) && IsEnabled(CustomComboPreset.MonkSTComboOpoOpoOption))
+                            return HasEffect(MNK.Buffs.LeadenFist) ? MNK.Bootshine : MNK.DragonKick;
                         return actionID == MNK.TrueStrike ? MNK.SnapPunch : MNK.Demolish;
                 }
             }
@@ -175,11 +183,11 @@ namespace XIVComboExpandedestPlugin.Combos
                 if (pb != null && HasEffect(MNK.Buffs.PerfectBalance))
                 {
                     if (pb.StackCount == 3)
-                        return OriginalHook(MNK.ArmOfTheDestroyer);
-                    if (pb.StackCount == 2)
                         return MNK.FourPointFury;
-                    if (pb.StackCount == 1)
+                    if (pb.StackCount == 2)
                         return MNK.Rockbreaker;
+                    if (pb.StackCount == 1)
+                        return OriginalHook(MNK.ArmOfTheDestroyer);
                 }
 
                 if (HasEffect(MNK.Buffs.FormlessFist))
@@ -287,5 +295,47 @@ namespace XIVComboExpandedestPlugin.Combos
 
             return actionID;
         }
+    }
+
+    internal unsafe class MyMNKGauge
+    {
+        private readonly IntPtr address;
+
+        internal MyMNKGauge(MNKGauge gauge)
+        {
+            this.address = gauge.Address;
+        }
+
+        public byte Chakra => *(byte*)(this.address + 0x8);
+
+        public BeastChakra[] BeastChakra => new[]
+        {
+            *(BeastChakra*)(this.address + 0x9),
+            *(BeastChakra*)(this.address + 0xA),
+            *(BeastChakra*)(this.address + 0xB),
+        };
+
+        public Nadi Nadi => *(Nadi*)(this.address + 0xC);
+
+        public ushort BlitzTimeRemaining => *(ushort*)(this.address + 0xE);
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:Elements should appear in the correct order", Justification = "Pending PR")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:Enumeration items should be documented", Justification = "Pending PR")]
+    internal enum BeastChakra : byte
+    {
+        NONE = 0,
+        COEURL = 1,
+        OPOOPO = 2,
+        RAPTOR = 3,
+    }
+
+    [Flags]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:Enumeration items should be documented", Justification = "Pending PR")]
+    internal enum Nadi : byte
+    {
+        NONE = 0,
+        LUNAR = 2,
+        SOLAR = 4,
     }
 }
