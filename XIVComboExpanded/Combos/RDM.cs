@@ -53,6 +53,8 @@ namespace XIVComboExpandedestPlugin.Combos
             public const byte
                 Jolt = 2,
                 Verthunder = 4,
+                Verthunder2 = 18,
+                Veraero2 = 22,
                 Veraero = 10,
                 Verraise = 64,
                 Zwerchhau = 35,
@@ -219,6 +221,38 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 return actionID;
             }
+        }
+    }
+
+    internal class RedMageSmartcastAoECombo : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.RedMageSmartcastAoEFeature;
+
+        protected override uint[] ActionIDs { get; } = new[] { RDM.Veraero2, RDM.Verthunder2 };
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID is RDM.Veraero2 or RDM.Verthunder2)
+            {
+                if (
+                    (level >= RDM.Levels.Impact && (HasEffect(RDM.Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast) || HasEffect(RDM.Buffs.LostChainspell))
+                    || HasEffect(RDM.Buffs.Acceleration)
+                    || level < RDM.Levels.Verthunder2))
+                    return OriginalHook(RDM.Impact);
+
+                if (level < RDM.Levels.Veraero2)
+                    return RDM.Verthunder2;
+
+                RDMGauge gauge = GetJobGauge<RDMGauge>();
+
+                if (gauge.BlackMana > gauge.WhiteMana)
+                    return RDM.Veraero2;
+
+                if (gauge.WhiteMana > gauge.BlackMana)
+                    return RDM.Verthunder2;
+            }
+
+            return actionID;
         }
     }
 }
