@@ -1,12 +1,3 @@
-# XIVCombo Plus
-Personal fork of Expandedest with extra features that I enjoy.
-
-* Added RDM Smartcast AOE
-* Smart Storm's Eye/Storm's Path for WAR with a 10 sec refresh for Storm's Eye for better uptime
-
-To do list:
-* Add RDM Smartcast ST
-
 # XIVComboPlugin Expandedest
 This is an expanded version of Daemitus's XIVCombo Expanded for personal use, that I am modifying for personal use by adding features that me and friends would like to use. These can be used in any fork you like, no credit needed. None of these features will be added to the original XIVCombo, so please do not bug the creator of that about it. Thank you Daemitus, attickdoor, goaaats, and everyone else who contributed to making this plugin possible. Additional thanks to ALymphocyte for coding help!
 
