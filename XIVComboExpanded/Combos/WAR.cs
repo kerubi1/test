@@ -247,23 +247,4 @@ namespace XIVComboExpandedestPlugin.Combos
             return actionID;
         }
     }
-
-    internal class WarriorPrimalCycloneFeature : CustomCombo
-    {
-        protected override CustomComboPreset Preset => CustomComboPreset.WarriorPrimalCycloneFeature;
-
-        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-        {
-            if (actionID == WAR.InnerBeast || actionID == WAR.SteelCyclone)
-            {
-                if (level >= WAR.Levels.PrimalRend && HasEffect(WAR.Buffs.PrimalRendReady))
-                    return WAR.PrimalRend;
-
-                // Fell Cleave or Decimate
-                return OriginalHook(actionID);
-            }
-
-            return actionID;
-        }
-    }
 }

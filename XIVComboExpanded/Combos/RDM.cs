@@ -234,10 +234,12 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID is RDM.Veraero2 or RDM.Verthunder2)
             {
+                bool fastCasting = HasEffect(RDM.Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast) || HasEffect(RDM.Buffs.LostChainspell);
+
                 if (
-                    (level >= RDM.Levels.Impact && (HasEffect(RDM.Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast) || HasEffect(RDM.Buffs.LostChainspell))
+                    fastCasting
                     || HasEffect(RDM.Buffs.Acceleration)
-                    || level < RDM.Levels.Verthunder2))
+                    || level < RDM.Levels.Verthunder2)
                     return OriginalHook(RDM.Impact);
 
                 if (level < RDM.Levels.Veraero2)
