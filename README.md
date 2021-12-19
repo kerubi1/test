@@ -2,9 +2,9 @@
 Personal fork of Expandedest with extra features that I enjoy.
 
 * Added RDM Smartcast AOE
+* Smart Storm's Eye/Storm's Path for WAR with a 10 sec refresh for Storm's Eye for better uptime
 
 To do list:
-* Fix Storm's Eye refresh
 * Add RDM Smartcast ST
 
 # XIVComboPlugin Expandedest

@@ -29,8 +29,6 @@ namespace XIVComboExpandedestPlugin.Combos
             InnerChaos = 16465,
             PrimalRend = 25753;
 
-
-
         public static class Buffs
         {
             public const ushort
@@ -212,7 +210,7 @@ namespace XIVComboExpandedestPlugin.Combos
             return actionID;
         }
     }
-    
+
     // Replace Storm's Path with Storm's Path combo and overcap feature on main combo to fellcleave
     internal class WarriorStormsDotCombo : CustomCombo
     {
@@ -234,22 +232,9 @@ namespace XIVComboExpandedestPlugin.Combos
                     if (lastComboMove == WAR.Maim && level >= 50 && !HasEffectAny(WAR.Buffs.SurgingTempest))
                         return WAR.StormsEye;
                     if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
-                    {
-                        if (gauge == 100 && IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature) && level >= 54)
-                        {
-                            return WAR.FellCleave;
-                        }
-
                         return WAR.Maim;
-                    }
-
                     if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
                     {
-                        if (gauge >= 90 && IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature) && level >= 54)
-                        {
-                            return WAR.FellCleave;
-                        }
-
                         if (stormseyeBuff.RemainingTime < 10 && IsEnabled(CustomComboPreset.WarriorStormsEyeCombo) && level >= 50)
                             return WAR.StormsEye;
                         return WAR.StormsPath;
@@ -262,6 +247,7 @@ namespace XIVComboExpandedestPlugin.Combos
             return actionID;
         }
     }
+
     internal class WarriorPrimalCycloneFeature : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.WarriorPrimalCycloneFeature;
