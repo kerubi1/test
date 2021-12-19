@@ -522,8 +522,12 @@ namespace XIVComboExpandedestPlugin
         RedMageVeraeroVerThunderScorchFeature = 3510,
 
         [OrderedEnum]
-        [CustomComboInfo("Smartcast AoE", "Dynamically replaces Veraero/Verthunder 2 with the appropriate spell based on your job gauge.\nIncludes Impact/Scatter when fastcasting.", RDM.JobID)]
+        [CustomComboInfo("Smartcast AoE", "Dynamically replaces Veraero/Verthunder 2 with the appropriate spell based on your job gauge.\nIncludes Impact/Scatter when fastcasting.\nConflicts with Red Mage AoE Combo", RDM.JobID)]
         RedMageSmartcastAoEFeature = 3511,
+
+        [OrderedEnum]
+        [CustomComboInfo("Smartcast Single Target", "Dynamically replaces Verstone/Verfire with the appropriate spell based on your job gauge.\nVeraero and Verthunder are replaced with one or the other accordingly, for openers. \nConflicts with Verproc into Jolt", RDM.JobID)]
+        RedMageSmartcastSingleFeature = 3512,
 
         #endregion
         // ====================================================================================
