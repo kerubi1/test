@@ -110,7 +110,9 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 var gauge = GetJobGauge<BLMGauge>();
 
-                if (level >= BLM.Levels.Flare && gauge.UmbralHearts <= 1 && gauge.InAstralFire)
+                if (LocalPlayer is null) return actionID;
+
+                if (level >= BLM.Levels.Flare && ((gauge.UmbralHearts <= 1 && level >= BLM.Levels.Blizzard4) || LocalPlayer.CurrentMp < 3800) && gauge.InAstralFire)
                     return BLM.Flare;
             }
 
