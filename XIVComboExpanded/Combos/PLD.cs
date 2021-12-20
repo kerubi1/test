@@ -112,7 +112,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if (actionID == PLD.Prominence)
+            if (actionID == (IsEnabled(CustomComboPreset.PaladinEvilProminenceCombo) ? PLD.TotalEclipse : PLD.Prominence))
             {
                 if (comboTime > 0)
                 {
