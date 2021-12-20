@@ -12,6 +12,7 @@ namespace XIVComboExpandedestPlugin.Combos
             Consolation = 16546,
             EnergyDrain = 167,
             Aetherflow = 166,
+<<<<<<< HEAD
             Ruin1 = 163,
             Broil1 = 3584,
             Broil2 = 7435,
@@ -20,10 +21,24 @@ namespace XIVComboExpandedestPlugin.Combos
             Bio1 = 17864,
             Bio2 = 17865,
             Biolysis = 16540;
+=======
+            Indomitability = 3583,
+            Lustrate = 189,
+            Excogitation = 7434,
+            SacredSoil = 188,
+            SummonEos = 17215,
+            SummonSelene = 17216,
+            WhisperingDawn = 16537,
+            FeyIllumination = 16538,
+            Dissipation = 3587,
+            Aetherpact = 7437,
+            SummonSeraph = 16545;
+>>>>>>> c00e78a36ffad122d1a0d4aebc18167cf87e99c2
 
         public static class Buffs
         {
-            public const ushort Placeholder = 0;
+            public const ushort
+                Recitation = 1896;
         }
 
         public static class Debuffs
@@ -37,6 +52,20 @@ namespace XIVComboExpandedestPlugin.Combos
         public static class Levels
         {
             public const byte Placeholder = 0;
+        }
+    }
+
+    internal class ScholarFairyFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.ScholarFairyFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            var gauge = GetJobGauge<SCHGauge>();
+            if (!Service.BuddyList.PetBuddyPresent && gauge.SeraphTimer == 0)
+                return IsEnabled(CustomComboPreset.ScholarSeleneOption) ? SCH.SummonSelene : SCH.SummonEos;
+
+            return actionID;
         }
     }
 
@@ -88,6 +117,15 @@ namespace XIVComboExpandedestPlugin.Combos
                     if ((!TargetHasEffect(SCH.Debuffs.Bio1) && incombat && level >= 2 && level <= 25) || (bio1Debuff.RemainingTime < 3 && incombat && level >= 2 && level <= 25))
                         return SCH.Bio1;
                 }
+            }
+
+            if (IsEnabled(CustomComboPreset.ScholarEverythingFeature))
+            {
+                if (HasEffect(SCH.Buffs.Recitation) && (actionID == SCH.Indomitability || actionID == SCH.Excogitation))
+                    return actionID;
+                var gauge = GetJobGauge<SCHGauge>();
+                if (gauge.Aetherflow == 0)
+                    return SCH.Aetherflow;
             }
 
             return actionID;

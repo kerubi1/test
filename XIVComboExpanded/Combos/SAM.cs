@@ -338,12 +338,13 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 if (level >= SAM.Levels.OgiNamikiri)
                 {
-                    var gauge = GetJobGauge<SAMGauge>();
-                    if (gauge.MeditationStacks >= 3)
-                        return SAM.Shoha;
-
                     if (HasEffect(SAM.Buffs.OgiNamikiriReady))
+                    {
+                        var gauge = GetJobGauge<SAMGauge>();
+                        if (gauge.MeditationStacks >= 3)
+                            return SAM.Shoha;
                         return SAM.OgiNamikiri;
+                    }
 
                     if (OriginalHook(SAM.OgiNamikiri) == SAM.KaeshiNamikiri)
                         return SAM.KaeshiNamikiri;

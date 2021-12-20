@@ -624,7 +624,7 @@ namespace XIVComboExpandedestPlugin
         SamuraiShoha2Feature = 3410,
 
         [OrderedEnum]
-        [CustomComboInfo("Ikishoten Namikiri Feature", "Replace Ikishoten with Ogi Namikiri and then Kaeshi Namikiri when available.", SAM.JobID, SAM.Ikishoten)]
+        [CustomComboInfo("Ikishoten Namikiri Feature", "Replace Ikishoten with Ogi Namikiri and then Kaeshi Namikiri when available.\nIf you have full Meditation stacks, Ikishoten becomes Shoha while you have Ogi Namikiri ready.", SAM.JobID, SAM.Ikishoten)]
         SamuraiIkishotenNamikiriFeature = 3411,
 
         #endregion
@@ -636,12 +636,27 @@ namespace XIVComboExpandedestPlugin
         ScholarSeraphConsolationFeature = 2801,
 
         [OrderedEnum]
-        [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.", SCH.JobID, SCH.EnergyDrain)]
+        [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.", SCH.JobID, SCH.EnergyDrain, SCH.Excogitation, SCH.Lustrate, SCH.SacredSoil, SCH.Indomitability)]
         ScholarEnergyDrainFeature = 2802,
 
         [OrderedEnum]
+<<<<<<< HEAD
         [CustomComboInfo("Scholar DoT Feature", "Changes Broil to Biolysis at 3 seconds in combat.", SCH.JobID, SCH.Broil4, SCH.Broil3, SCH.Broil2, SCH.Ruin1)]
         SCHDotMainComboFeature = 2803,
+=======
+        [ParentCombo(ScholarEnergyDrainFeature)]
+        [CustomComboInfo("Everything Aetherflow", "Change every Aetherflow action into Aetherflow when you have no more Aetherflow stacks.\nIndomitability and Excogitation also become available with Recitation.", SCH.JobID, SCH.EnergyDrain, SCH.Excogitation, SCH.Lustrate, SCH.SacredSoil, SCH.Indomitability)]
+        ScholarEverythingFeature = 2803,
+
+        [OrderedEnum]
+        [CustomComboInfo("Fairy Feature", "Change every action that requires a fairy into Summon Eos if you do not have a fairy summoned.", SCH.JobID, SCH.WhisperingDawn, SCH.FeyIllumination, SCH.FeyBless, SCH.Aetherpact, SCH.Dissipation, SCH.SummonSeraph, SCH.Consolation)]
+        ScholarFairyFeature = 2804,
+
+        [OrderedEnum]
+        [ParentCombo(ScholarFairyFeature)]
+        [CustomComboInfo("Fairy Feature Selene Option", "Replaces Summon Eos replacing actions with Summon Selene, for if you think Eos is a skank.", SCH.JobID, SCH.WhisperingDawn, SCH.FeyIllumination, SCH.FeyBless, SCH.Aetherpact, SCH.Dissipation, SCH.SummonSeraph, SCH.Consolation)]
+        ScholarSeleneOption = 2805,
+>>>>>>> c00e78a36ffad122d1a0d4aebc18167cf87e99c2
 
         #endregion
         // ====================================================================================
