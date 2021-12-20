@@ -1,3 +1,6 @@
+# XIVComboPlugin Plus
+Personal Fork of Grammernatzi's additions with extra features that I enjoy.
+
 # XIVComboPlugin Expandedest
 This is an expanded version of Daemitus's XIVCombo Expanded for personal use, that I am modifying for personal use by adding features that me and friends would like to use. These can be used in any fork you like, no credit needed. None of these features will be added to the original XIVCombo, so please do not bug the creator of that about it. Thank you Daemitus, attickdoor, goaaats, and everyone else who contributed to making this plugin possible. Additional thanks to ALymphocyte for coding help!
 
