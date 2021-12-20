@@ -12,7 +12,6 @@ namespace XIVComboExpandedestPlugin.Combos
             Consolation = 16546,
             EnergyDrain = 167,
             Aetherflow = 166,
-<<<<<<< HEAD
             Ruin1 = 163,
             Broil1 = 3584,
             Broil2 = 7435,
@@ -20,8 +19,7 @@ namespace XIVComboExpandedestPlugin.Combos
             Broil4 = 25865,
             Bio1 = 17864,
             Bio2 = 17865,
-            Biolysis = 16540;
-=======
+            Biolysis = 16540,
             Indomitability = 3583,
             Lustrate = 189,
             Excogitation = 7434,
@@ -33,7 +31,6 @@ namespace XIVComboExpandedestPlugin.Combos
             Dissipation = 3587,
             Aetherpact = 7437,
             SummonSeraph = 16545;
->>>>>>> c00e78a36ffad122d1a0d4aebc18167cf87e99c2
 
         public static class Buffs
         {
@@ -86,6 +83,32 @@ namespace XIVComboExpandedestPlugin.Combos
         }
     }
 
+    internal class ScholarEnergyDrainFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.ScholarEnergyDrainFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == SCH.EnergyDrain)
+            {
+                var gauge = GetJobGauge<SCHGauge>();
+                if (gauge.Aetherflow == 0)
+                    return SCH.Aetherflow;
+            }
+
+            if (IsEnabled(CustomComboPreset.ScholarEverythingFeature))
+            {
+                if (HasEffect(SCH.Buffs.Recitation) && (actionID == SCH.Indomitability || actionID == SCH.Excogitation))
+                    return actionID;
+                var gauge = GetJobGauge<SCHGauge>();
+                if (gauge.Aetherflow == 0)
+                    return SCH.Aetherflow;
+            }
+
+            return actionID;
+        }
+    }
+
     internal class SCHDotMainComboFeature : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.SCHDotMainComboFeature;
@@ -117,15 +140,6 @@ namespace XIVComboExpandedestPlugin.Combos
                     if ((!TargetHasEffect(SCH.Debuffs.Bio1) && incombat && level >= 2 && level <= 25) || (bio1Debuff.RemainingTime < 3 && incombat && level >= 2 && level <= 25))
                         return SCH.Bio1;
                 }
-            }
-
-            if (IsEnabled(CustomComboPreset.ScholarEverythingFeature))
-            {
-                if (HasEffect(SCH.Buffs.Recitation) && (actionID == SCH.Indomitability || actionID == SCH.Excogitation))
-                    return actionID;
-                var gauge = GetJobGauge<SCHGauge>();
-                if (gauge.Aetherflow == 0)
-                    return SCH.Aetherflow;
             }
 
             return actionID;

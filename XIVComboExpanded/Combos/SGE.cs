@@ -19,18 +19,28 @@ namespace XIVComboExpandedestPlugin.Combos
             Phlegma = 24289,
             Phlegmara = 24307,
             Phlegmaga = 24313,
-            Dyskrasia = 24297;
+            Dyskrasia = 24297,
+            Dosis1 = 24283,
+            Dosis2 = 24306,
+            Dosis3 = 24312,
+            Eukrasia = 24290,
+            EukrasianDosis1 = 24293,
+            EukrasianDosis2 = 24308,
+            EukrasianDosis3 = 24314;
 
         public static class Buffs
         {
             public const ushort
-                Kardia = 2604;
+                Kardia = 2604,
+                Eukrasia = 2606;
         }
 
         public static class Debuffs
         {
             public const ushort
-                Placeholder = 0;
+                EukrasianDosis1 = 2614,
+                EukrasianDosis2 = 2615,
+                EukrasianDosis3 = 2616;
         }
 
         public static class Levels
@@ -119,6 +129,49 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (!IsActionOffCooldown(SGE.Taurochole) || level < SGE.Levels.Taurochole)
                 return SGE.Druochole;
+
+            return actionID;
+        }
+    }
+
+    internal class SGEDotMainComboFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.SGEDotMainComboFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == SGE.Dosis3 || actionID == SGE.Dosis2 || actionID == SGE.Dosis1)
+            {
+                var incombat = HasCondition(Dalamud.Game.ClientState.Conditions.ConditionFlag.InCombat);
+                var edosis3debuff = TargetFindOwnEffect(SGE.Debuffs.EukrasianDosis3);
+                var edosis2debuff = TargetFindOwnEffect(SGE.Debuffs.EukrasianDosis2);
+                var edosis1debuff = TargetFindOwnEffect(SGE.Debuffs.EukrasianDosis1);
+                var dosis3 = GetCooldown(SGE.Dosis3);
+
+                if (IsEnabled(CustomComboPreset.SGEDotMainComboFeature) && level >= 82)
+                {
+                    if (HasEffect(SGE.Buffs.Eukrasia))
+                        return SGE.EukrasianDosis3;
+                    if ((!TargetHasEffect(SGE.Debuffs.EukrasianDosis3) && incombat && level >= 82) || (edosis3debuff.RemainingTime < 5 && incombat && level >= 82))
+                        return SGE.Eukrasia;
+                }
+
+                if (IsEnabled(CustomComboPreset.SGEDotMainComboFeature) && level >= 72 && level <= 81)
+                {
+                    if (HasEffect(SGE.Buffs.Eukrasia))
+                        return SGE.EukrasianDosis2;
+                    if ((!TargetHasEffect(SGE.Debuffs.EukrasianDosis2) && incombat && level >= 72 && level <= 81) || (edosis2debuff.RemainingTime < 3 && incombat && level >= 72 && level <= 81))
+                        return SGE.Eukrasia;
+                }
+
+                if (IsEnabled(CustomComboPreset.SGEDotMainComboFeature) && level >= 30 && level <= 71)
+                {
+                    if (HasEffect(SGE.Buffs.Eukrasia))
+                        return SGE.EukrasianDosis1;
+                    if ((!TargetHasEffect(SGE.Debuffs.EukrasianDosis1) && incombat && level >= 30 && level <= 71) || (edosis1debuff.RemainingTime < 5 && incombat && level >= 30 && level <= 71))
+                        return SGE.Eukrasia;
+                }
+            }
 
             return actionID;
         }

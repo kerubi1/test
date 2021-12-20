@@ -553,6 +553,10 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Taurochole into Druochole", "Replaces Taurochole with Druochole if the former is on cooldown.\nYou should probably still keep the latter on your bar for certain scenarios.", SGE.JobID, SGE.Taurochole)]
         SageTauroDruoFeature = 4004,
 
+        [OrderedEnum]
+        [CustomComboInfo("Sage DoT Feature", "Changes Dosis to Eukrasia at 5 seconds in combat.", SGE.JobID, SGE.Dosis3, SGE.Dosis2, SGE.Dosis1)]
+        SGEDotMainComboFeature = 4005,
+
         #endregion
         // ====================================================================================
         #region SAMURAI
@@ -640,10 +644,6 @@ namespace XIVComboExpandedestPlugin
         ScholarEnergyDrainFeature = 2802,
 
         [OrderedEnum]
-<<<<<<< HEAD
-        [CustomComboInfo("Scholar DoT Feature", "Changes Broil to Biolysis at 3 seconds in combat.", SCH.JobID, SCH.Broil4, SCH.Broil3, SCH.Broil2, SCH.Ruin1)]
-        SCHDotMainComboFeature = 2803,
-=======
         [ParentCombo(ScholarEnergyDrainFeature)]
         [CustomComboInfo("Everything Aetherflow", "Change every Aetherflow action into Aetherflow when you have no more Aetherflow stacks.\nIndomitability and Excogitation also become available with Recitation.", SCH.JobID, SCH.EnergyDrain, SCH.Excogitation, SCH.Lustrate, SCH.SacredSoil, SCH.Indomitability)]
         ScholarEverythingFeature = 2803,
@@ -656,7 +656,10 @@ namespace XIVComboExpandedestPlugin
         [ParentCombo(ScholarFairyFeature)]
         [CustomComboInfo("Fairy Feature Selene Option", "Replaces Summon Eos replacing actions with Summon Selene, for if you think Eos is a skank.", SCH.JobID, SCH.WhisperingDawn, SCH.FeyIllumination, SCH.FeyBless, SCH.Aetherpact, SCH.Dissipation, SCH.SummonSeraph, SCH.Consolation)]
         ScholarSeleneOption = 2805,
->>>>>>> c00e78a36ffad122d1a0d4aebc18167cf87e99c2
+
+        [OrderedEnum]
+        [CustomComboInfo("Scholar DoT Feature", "Changes Broil to Biolysis at 3 seconds in combat.", SCH.JobID, SCH.Broil4, SCH.Broil3, SCH.Broil2, SCH.Ruin1)]
+        SCHDotMainComboFeature = 2806,
 
         #endregion
         // ====================================================================================
