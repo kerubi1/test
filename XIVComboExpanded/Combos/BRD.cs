@@ -99,8 +99,8 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 if (level < BRD.Levels.IronJaws)
                 {
-                    var venomous = FindTargetEffect(BRD.Debuffs.VenomousBite);
-                    var windbite = FindTargetEffect(BRD.Debuffs.Windbite);
+                    var venomous = TargetFindOwnEffect(BRD.Debuffs.VenomousBite);
+                    var windbite = TargetFindOwnEffect(BRD.Debuffs.Windbite);
                     if (venomous is not null && windbite is not null)
                     {
                         if (venomous?.RemainingTime < windbite?.RemainingTime)
@@ -117,25 +117,25 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (level < BRD.Levels.BiteUpgrade)
                 {
-                    var venomous = TargetHasEffect(BRD.Debuffs.VenomousBite);
-                    var windbite = TargetHasEffect(BRD.Debuffs.Windbite);
+                    var venomous = TargetFindOwnEffect(BRD.Debuffs.VenomousBite);
+                    var windbite = TargetFindOwnEffect(BRD.Debuffs.Windbite);
 
-                    if (venomous && windbite)
+                    if (venomous is not null & windbite is not null)
                         return BRD.IronJaws;
 
-                    if (windbite)
+                    if (windbite is not null)
                         return BRD.VenomousBite;
 
                     return BRD.Windbite;
                 }
 
-                var caustic = TargetHasEffect(BRD.Debuffs.CausticBite);
-                var stormbite = TargetHasEffect(BRD.Debuffs.Stormbite);
+                var caustic = TargetFindOwnEffect(BRD.Debuffs.CausticBite);
+                var stormbite = TargetFindOwnEffect(BRD.Debuffs.Stormbite);
 
-                if (caustic && stormbite)
+                if (caustic is not null && stormbite is not null)
                     return BRD.IronJaws;
 
-                if (stormbite)
+                if (stormbite is not null)
                     return BRD.CausticBite;
 
                 return BRD.Stormbite;

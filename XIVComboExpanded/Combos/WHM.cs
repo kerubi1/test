@@ -13,7 +13,16 @@ namespace XIVComboExpandedestPlugin.Combos
             Cure2 = 135,
             AfflatusSolace = 16531,
             AfflatusRapture = 16534,
-            AfflatusMisery = 16535;
+            AfflatusMisery = 16535,
+            Stone = 119,
+            Stone2 = 127,
+            Stone3 = 3568,
+            Stone4 = 7431,
+            Glare = 16533,
+            Glare3 = 25859,
+            Aero = 121,
+            Aero2 = 132,
+            Dia = 16532;
 
         public static class Buffs
         {
@@ -22,7 +31,10 @@ namespace XIVComboExpandedestPlugin.Combos
 
         public static class Debuffs
         {
-            public const ushort Placeholder = 0;
+            public const ushort
+            Aero = 143,
+            Aero2 = 144,
+            Dia = 2035;
         }
 
         public static class Levels
@@ -30,7 +42,16 @@ namespace XIVComboExpandedestPlugin.Combos
             public const byte
                 Cure2 = 30,
                 AfflatusSolace = 52,
-                AfflatusRapture = 76;
+                AfflatusRapture = 76,
+                Stone = 1,
+                Stone2 = 18,
+                Stone3 = 54,
+                Stone4 = 64,
+                Glare = 72,
+                Glare3 = 82,
+                Aero = 4,
+                Aero2 = 46,
+                Dia = 72;
         }
     }
 
@@ -113,4 +134,40 @@ namespace XIVComboExpandedestPlugin.Combos
             return actionID;
         }
     }
+
+    internal class WhiteMageDotFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.WhiteMageDotFeature;
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == WAR.StormsPath)
+            {
+                var heavyswingCD = GetCooldown(WAR.HeavySwing);
+                var upheavalCD = GetCooldown(WAR.Upheaval);
+                var innerreleaseCD = GetCooldown(WAR.InnerRelease);
+                var beserkCD = GetCooldown(WAR.Berserk);
+                var stormseyeBuff = FindEffectAny(WAR.Buffs.SurgingTempest);
+                var innerReleaseBuff = HasEffect(WAR.Buffs.InnerRelease);
+                if (comboTime > 0)
+                {
+                    var gauge = GetJobGauge<WARGauge>().BeastGauge;
+                    if (lastComboMove == WAR.Maim && level >= 50 && !HasEffectAny(WAR.Buffs.SurgingTempest))
+                        return WAR.StormsEye;
+                    if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
+                        return WAR.Maim;
+                    if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
+                    {
+                        if (stormseyeBuff.RemainingTime < 10 && IsEnabled(CustomComboPreset.WarriorStormsEyeCombo) && level >= 50)
+                            return WAR.StormsEye;
+                        return WAR.StormsPath;
+                    }
+                }
+
+                return WAR.HeavySwing;
+            }
+
+            return actionID;
+        }
+    }
+
 }

@@ -287,6 +287,27 @@ namespace XIVComboExpandedestPlugin.Combos
         }
 
         /// <summary>
+        /// Gets own target effect for an action.
+        /// </summary>
+        /// <param name="effectID">Status effect ID.</param>
+        /// <returns>A value indicating if the effect exists.</returns>
+        protected static Status? TargetFindOwnEffect(ushort effectID) => FindEffect(effectID, CurrentTarget, LocalPlayer?.ObjectId);
+
+        protected static bool TargetHasOwnEffect(ushort effectID) => TargetFindOwnEffect(effectID) is not null;
+
+        protected static float TargetOwnEffectDuration(ushort effectID)
+        {
+            Status? eff = TargetFindOwnEffect(effectID);
+            return eff?.RemainingTime ?? 0;
+        }
+
+        protected static float TargetOwnEffectStacks(ushort effectId)
+        {
+            Status? eff = TargetFindOwnEffect(effectId);
+            return eff?.StackCount ?? 0;
+        }
+
+        /// <summary>
         /// Gets the cooldown data for an action.
         /// </summary>
         /// <param name="actionID">Action ID to check.</param>

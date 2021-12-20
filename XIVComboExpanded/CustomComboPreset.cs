@@ -748,6 +748,10 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Afflatus Feature", "Changes Cure 2 into Afflatus Solace, and Medica into Afflatus Rapture, when lilies are up.", WHM.JobID, WHM.Cure2, WHM.Medica)]
         WhiteMageAfflatusFeature = 2404,
 
+        [OrderedEnum]
+        [CustomComboInfo("White Mage DoT Feature", "Changes Glare to Dia at 5 seconds.", WHM.JobID, WHM.Glare3)]
+        WhiteMageDotFeature = 2405,
+
         #endregion
         // ====================================================================================
     }
