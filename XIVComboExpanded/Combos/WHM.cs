@@ -14,13 +14,13 @@ namespace XIVComboExpandedestPlugin.Combos
             AfflatusSolace = 16531,
             AfflatusRapture = 16534,
             AfflatusMisery = 16535,
-            Stone = 119,
+            Stone1 = 119,
             Stone2 = 127,
             Stone3 = 3568,
             Stone4 = 7431,
-            Glare = 16533,
+            Glare1 = 16533,
             Glare3 = 25859,
-            Aero = 121,
+            Aero1 = 121,
             Aero2 = 132,
             Dia = 16532;
 
@@ -34,7 +34,7 @@ namespace XIVComboExpandedestPlugin.Combos
             public const ushort
             Aero = 143,
             Aero2 = 144,
-            Dia = 2035;
+            Dia = 1871;
         }
 
         public static class Levels
@@ -49,7 +49,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 Stone4 = 64,
                 Glare = 72,
                 Glare3 = 82,
-                Aero = 4,
+                Aero1 = 4,
                 Aero2 = 46,
                 Dia = 72;
         }
@@ -135,39 +135,46 @@ namespace XIVComboExpandedestPlugin.Combos
         }
     }
 
-    internal class WhiteMageDotFeature : CustomCombo
+    internal class WHMDotMainComboFeature : CustomCombo
     {
-        protected override CustomComboPreset Preset => CustomComboPreset.WhiteMageDotFeature;
+        protected override CustomComboPreset Preset => CustomComboPreset.WHMDotMainComboFeature;
+
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if (actionID == WAR.StormsPath)
+            if (actionID == WHM.Glare3 || actionID == WHM.Glare1 || actionID == WHM.Stone1 || actionID == WHM.Stone2 || actionID == WHM.Stone3 || actionID == WHM.Stone4)
             {
-                var heavyswingCD = GetCooldown(WAR.HeavySwing);
-                var upheavalCD = GetCooldown(WAR.Upheaval);
-                var innerreleaseCD = GetCooldown(WAR.InnerRelease);
-                var beserkCD = GetCooldown(WAR.Berserk);
-                var stormseyeBuff = FindEffectAny(WAR.Buffs.SurgingTempest);
-                var innerReleaseBuff = HasEffect(WAR.Buffs.InnerRelease);
-                if (comboTime > 0)
+                var inCombat = HasCondition(Dalamud.Game.ClientState.Conditions.ConditionFlag.InCombat);
+                var diaDebuff = TargetFindOwnEffect(WHM.Debuffs.Dia);
+                var aero1Debuff = TargetFindOwnEffect(WHM.Debuffs.Aero);
+                var aero2Debuff = TargetFindOwnEffect(WHM.Debuffs.Aero2);
+                var glare3 = GetCooldown(WHM.Glare3);
+
+                if (IsEnabled(CustomComboPreset.WHMDotMainComboFeature) && level >= 4 && level <= 45)
                 {
-                    var gauge = GetJobGauge<WARGauge>().BeastGauge;
-                    if (lastComboMove == WAR.Maim && level >= 50 && !HasEffectAny(WAR.Buffs.SurgingTempest))
-                        return WAR.StormsEye;
-                    if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
-                        return WAR.Maim;
-                    if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
+                    if ((!TargetHasEffect(WHM.Debuffs.Aero) && inCombat && level >= 4 && level <= 45) || (aero1Debuff.RemainingTime <= 3 && inCombat && level >= 4 && level <= 45))
                     {
-                        if (stormseyeBuff.RemainingTime < 10 && IsEnabled(CustomComboPreset.WarriorStormsEyeCombo) && level >= 50)
-                            return WAR.StormsEye;
-                        return WAR.StormsPath;
+                        return WHM.Aero1;
                     }
                 }
 
-                return WAR.HeavySwing;
+                if (IsEnabled(CustomComboPreset.WHMDotMainComboFeature) && level >= 46 && level <= 71)
+                {
+                    if ((!TargetHasEffect(WHM.Debuffs.Aero2) && inCombat && level >= 46 && level <= 71) || (aero2Debuff.RemainingTime <= 3 && inCombat && level >= 46 && level <= 71))
+                    {
+                        return WHM.Aero2;
+                    }
+                }
+
+                if (IsEnabled(CustomComboPreset.WHMDotMainComboFeature) && level >= 72)
+                {
+                    if ((!TargetHasEffect(WHM.Debuffs.Dia) && inCombat && level >= 72) || (diaDebuff.RemainingTime <= 3 && inCombat && level >= 72))
+                    {
+                        return WHM.Dia;
+                    }
+                }
             }
 
             return actionID;
         }
     }
-
 }

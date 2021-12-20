@@ -32,16 +32,20 @@ namespace XIVComboExpandedestPlugin
         AstrologianCardsOnDrawFeature = 3301,
 
         [OrderedEnum]
-        [CustomComboInfo("Play to Astrodyne", "Play becomes Astrodyne when you have 3 seals.\nIf Draw on Play is enabled, Astrodyne replaces Draw on Play while Draw is on Cooldown.", AST.JobID, AST.Play)]
-        AstrologianAstrodynePlayFeature = 3304,
-
-        [OrderedEnum]
         [CustomComboInfo("Minor Arcana to Crown Play", "Changes Minor Arcana to Crown Play when a card is not drawn.", AST.JobID, AST.MinorArcana)]
         AstrologianMinorArcanaPlayFeature = 3302,
 
         [OrderedEnum]
         [CustomComboInfo("Benefic 2 to Benefic Level Sync", "Changes Benefic 2 to Benefic when below level 26 in synced content.", AST.JobID, AST.Benefic2)]
         AstrologianBeneficFeature = 3303,
+
+        [OrderedEnum]
+        [CustomComboInfo("Play to Astrodyne", "Play becomes Astrodyne when you have 3 seals.\nIf Draw on Play is enabled, Astrodyne replaces Draw on Play while Draw is on Cooldown.", AST.JobID, AST.Play)]
+        AstrologianAstrodynePlayFeature = 3304,
+
+        [OrderedEnum]
+        [CustomComboInfo("Astrologian DoT Feature", "Changes Malefic to Combust at 3 seconds in combat", AST.JobID, AST.FallMalefic, AST.Malefic4, AST.Malefic3, AST.Malefic2, AST.Malefic1)]
+        ASTDotMainComboFeature = 3305,
 
         #endregion
         // ====================================================================================
@@ -635,6 +639,10 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.", SCH.JobID, SCH.EnergyDrain)]
         ScholarEnergyDrainFeature = 2802,
 
+        [OrderedEnum]
+        [CustomComboInfo("Scholar DoT Feature", "Changes Broil to Biolysis at 3 seconds in combat.", SCH.JobID, SCH.Broil4, SCH.Broil3, SCH.Broil2, SCH.Ruin1)]
+        SCHDotMainComboFeature = 2803,
+
         #endregion
         // ====================================================================================
         #region SUMMONER
@@ -749,8 +757,8 @@ namespace XIVComboExpandedestPlugin
         WhiteMageAfflatusFeature = 2404,
 
         [OrderedEnum]
-        [CustomComboInfo("White Mage DoT Feature", "Changes Glare to Dia at 5 seconds.", WHM.JobID, WHM.Glare3)]
-        WhiteMageDotFeature = 2405,
+        [CustomComboInfo("White Mage DoT Feature", "Changes Glare to Dia at 3 seconds in combat.", WHM.JobID, WHM.Glare3, WHM.Dia)]
+        WHMDotMainComboFeature = 2405,
 
         #endregion
         // ====================================================================================

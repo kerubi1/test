@@ -19,9 +19,25 @@ namespace XIVComboExpandedestPlugin.Combos
             Spire = 4406,
             MinorArcana = 7443,
             SleeveDraw = 7448,
-            Play = 17055,
+            Malefic4 = 16555,
+            LucidDreaming = 7562,
+            Ascend = 3603,
+            Swiftcast = 7561,
             CrownPlay = 25869,
-            Astrodyne = 25870;
+            Astrodyne = 25870,
+            FallMalefic = 25871,
+            Malefic1 = 3596,
+            Malefic2 = 3598,
+            Malefic3 = 7442,
+            Combust = 3599,
+            Play = 17055,
+            LordOfCrowns = 7444,
+            LadyOfCrown = 7445,
+            Combust3 = 16554,
+            Combust2 = 3608,
+            Combust1 = 3599,
+            Helios = 3600,
+            AspectedHelios = 3601;
 
         public static class Buffs
         {
@@ -38,14 +54,19 @@ namespace XIVComboExpandedestPlugin.Combos
 
         public static class Debuffs
         {
-            public const ushort Placeholder = 0;
+            public const ushort
+                Combust1 = 838,
+                Combust2 = 843,
+                Combust3 = 1881;
         }
 
         public static class Levels
         {
             public const byte
                 Benefic2 = 26,
-                MinorArcana = 70;
+                MinorArcana = 50,
+                Draw = 30,
+                CrownPlay = 70;
         }
     }
 
@@ -114,6 +135,43 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 if (level < AST.Levels.Benefic2)
                     return AST.Benefic;
+            }
+
+            return actionID;
+        }
+    }
+
+    internal class ASTDotMainComboFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.ASTDotMainComboFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == AST.FallMalefic || actionID == AST.Malefic4 || actionID == AST.Malefic3 || actionID == AST.Malefic2 || actionID == AST.Malefic1)
+            {
+                var incombat = HasCondition(Dalamud.Game.ClientState.Conditions.ConditionFlag.InCombat);
+                var combust3Debuff = TargetFindOwnEffect(AST.Debuffs.Combust3);
+                var combust2Debuff = TargetFindOwnEffect(AST.Debuffs.Combust2);
+                var combust1Debuff = TargetFindOwnEffect(AST.Debuffs.Combust1);
+                var fallmalefic = GetCooldown(AST.FallMalefic);
+
+                if (IsEnabled(CustomComboPreset.ASTDotMainComboFeature) && level >= 72)
+                {
+                    if ((!TargetHasEffect(AST.Debuffs.Combust3) && incombat && level >= 72) || (combust3Debuff.RemainingTime < 3 && incombat && level >= 72))
+                        return AST.Combust3;
+                }
+
+                if (IsEnabled(CustomComboPreset.ASTDotMainComboFeature) && level >= 46 && level <= 71)
+                {
+                    if ((!TargetHasEffect(AST.Debuffs.Combust2) && incombat && level >= 46 && level <= 71) || (combust2Debuff.RemainingTime < 3 && incombat && level >= 46 && level <= 71))
+                        return AST.Combust2;
+                }
+
+                if (IsEnabled(CustomComboPreset.ASTDotMainComboFeature) && level >= 4 && level <= 45)
+                {
+                    if ((!TargetHasEffect(AST.Debuffs.Combust1) && incombat && level >= 4 && level <= 45) || (combust1Debuff.RemainingTime < 3 && incombat && level >= 4 && level <= 45))
+                        return AST.Combust1;
+                }
             }
 
             return actionID;
