@@ -156,7 +156,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if (actionID == SAM.Mangetsu)
+            if ((!IsEnabled(CustomComboPreset.SamuraiEvilMangetsuCombo) && actionID == SAM.Mangetsu) || (IsEnabled(CustomComboPreset.SamuraiEvilMangetsuCombo) && (actionID == SAM.Fuga || actionID == SAM.Fuko)))
             {
                 if (HasEffect(SAM.Buffs.MeikyoShisui))
                     return SAM.Mangetsu;

@@ -161,7 +161,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if (actionID == GNB.DemonSlaughter)
+            if (actionID == (IsEnabled(CustomComboPreset.GunbreakerEvilDemonSlaughterCombo) ? GNB.DemonSlice : GNB.DemonSlaughter))
             {
                 if (comboTime > 0 && lastComboMove == GNB.DemonSlice && level >= GNB.Levels.DemonSlaughter)
                 {

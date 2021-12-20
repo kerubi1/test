@@ -84,7 +84,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if (actionID == DRK.StalwartSoul)
+            if (actionID == (IsEnabled(CustomComboPreset.DarkEvilStalwartSoulCombo) ? DRK.Unleash : DRK.StalwartSoul))
             {
                 if (IsEnabled(CustomComboPreset.DarkDeliriumFeature))
                 {

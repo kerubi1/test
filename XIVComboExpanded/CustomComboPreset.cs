@@ -186,8 +186,14 @@ namespace XIVComboExpandedestPlugin
         DarkSouleaterCombo = 3201,
 
         [OrderedEnum]
-        [CustomComboInfo("Stalwart Soul Combo", "Replace Stalwart Soul with its combo chain.", DRK.JobID, DRK.StalwartSoul)]
+        [CustomComboInfo("Stalwart Soul Combo", "Replace Stalwart Soul with its combo chain.", DRK.JobID, DRK.StalwartSoul, DRK.Unleash)]
         DarkStalwartSoulCombo = 3202,
+
+        [OrderedEnum]
+        [SecretCustomCombo]
+        [ParentCombo(DarkStalwartSoulCombo)]
+        [CustomComboInfo("Evil Stalwart Soul Combo", "Replace Unleash with its combo chain, instead.", DRK.JobID, DRK.StalwartSoul, DRK.Unleash)]
+        DarkEvilStalwartSoulCombo = 3205,
 
         [OrderedEnum]
         [CustomComboInfo("Dark Knight Gauge Overcap Feature", "Replace AoE combo with gauge spender if you are about to overcap.", DRK.JobID, DRK.StalwartSoul)]
@@ -219,8 +225,14 @@ namespace XIVComboExpandedestPlugin
         GunbreakerBowShockSonicBreakFeature = 3704,
 
         [OrderedEnum]
-        [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain.", GNB.JobID, GNB.DemonSlaughter)]
+        [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain.", GNB.JobID, GNB.DemonSlaughter, GNB.DemonSlice)]
         GunbreakerDemonSlaughterCombo = 3705,
+
+        [OrderedEnum]
+        [SecretCustomCombo]
+        [ParentCombo(GunbreakerDemonSlaughterCombo)]
+        [CustomComboInfo("Evil Demon Slaughter Combo", "Replace Demon Slice with its combo chain, instead.", GNB.JobID, GNB.DemonSlaughter, GNB.DemonSlice)]
+        GunbreakerEvilDemonSlaughterCombo = 3709,
 
         [OrderedEnum]
         [CustomComboInfo("Fated Circle Feature", "In addition to the Demon Slaughter combo, add Fated Circle when charges are full.", GNB.JobID, GNB.DemonSlaughter)]
@@ -331,8 +343,14 @@ namespace XIVComboExpandedestPlugin
         NinjaAeolianEdgeCombo = 3002,
 
         [OrderedEnum]
-        [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain.", NIN.JobID, NIN.HakkeMujinsatsu)]
+        [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain.", NIN.JobID, NIN.HakkeMujinsatsu, NIN.DeathBlossom)]
         NinjaHakkeMujinsatsuCombo = 3003,
+
+        [OrderedEnum]
+        [SecretCustomCombo]
+        [ParentCombo(NinjaHakkeMujinsatsuCombo)]
+        [CustomComboInfo("Evil Hakke Mujinsatsu Combo", "Replace Death Blossom with its combo chain instead.", NIN.JobID, NIN.HakkeMujinsatsu, NIN.DeathBlossom)]
+        NinjaEvilHakkeMujinsatsuCombo = 3014,
 
         [OrderedEnum]
         [CustomComboInfo("Kassatsu to Trick", "Replaces Kassatsu with Trick Attack while Suiton or Hidden is up.\nCooldown tracking plugin recommended.", NIN.JobID, NIN.Kassatsu)]
@@ -395,8 +413,14 @@ namespace XIVComboExpandedestPlugin
         PaladinAtonementFeature = 1903,
 
         [OrderedEnum]
-        [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain.", PLD.JobID, PLD.Prominence)]
+        [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain.", PLD.JobID, PLD.Prominence, PLD.TotalEclipse)]
         PaladinProminenceCombo = 1904,
+
+        [OrderedEnum]
+        [SecretCustomCombo]
+        [ParentCombo(PaladinProminenceCombo)]
+        [CustomComboInfo("Evil Prominence Combo", "Replace Total Eclipse with its combo chain, instead.", PLD.JobID, PLD.Prominence, PLD.TotalEclipse)]
+        PaladinEvilProminenceCombo = 1907,
 
         [OrderedEnum]
         [CustomComboInfo("Requiescat Confiteor", "Replace Requiescat with Confiter while under the effect of Requiescat. Includes Confiteor combo.", PLD.JobID, PLD.Requiescat)]
@@ -584,8 +608,14 @@ namespace XIVComboExpandedestPlugin
         SamuraiKashaOption = 3416,
 
         [OrderedEnum]
-        [CustomComboInfo("Mangetsu Combo", "Replace Mangetsu with its combo chain.", SAM.JobID, SAM.Mangetsu)]
+        [CustomComboInfo("Mangetsu Combo", "Replace Mangetsu with its combo chain.", SAM.JobID, SAM.Mangetsu, SAM.Fuga, SAM.Fuko)]
         SamuraiMangetsuCombo = 3404,
+
+        [OrderedEnum]
+        [SecretCustomCombo]
+        [ParentCombo(SamuraiMangetsuCombo)]
+        [CustomComboInfo("Evil Mangetsu Combo", "Replace Fuga/Fuko with its combo chain, instead.", SAM.JobID, SAM.Mangetsu, SAM.Fuga, SAM.Fuko)]
+        SamuraiEvilMangetsuCombo = 3417,
 
         [OrderedEnum]
         [CustomComboInfo("Oka Combo", "Replace Oka with its combo chain.", SAM.JobID, SAM.Oka)]
