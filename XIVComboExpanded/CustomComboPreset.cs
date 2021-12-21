@@ -495,6 +495,18 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Grim Swathe Feature", "When Gluttony is off-cooldown, Grim Swathe will turn into Gluttony.", RPR.JobID, RPR.GrimSwathe)]
         ReaperGrimSwatheFeature = 3914,
 
+        [OrderedEnum]
+        [ParentCombo(ReaperSliceCombo)]
+        [CustomComboInfo("Shadow of Death Feature", "Adds Shadow of Death to ST Buff Combo at less than 3 seconds.", RPR.JobID, RPR.Slice, RPR.WaxingSlice, RPR.InfernalSlice, RPR.ShadowOfDeath)]
+        ReaperShadowOfDeathFeature = 3915,
+
+        [OrderedEnum]
+        [ParentCombo(ReaperGibbetGallowsFeature)]
+        [CustomComboInfo("Reaper AoE Buff Combo", "When Gluttony is off-cooldown, Grim Swathe will turn into Gluttony.", RPR.JobID, RPR.SpinningScythe)]
+        ReaperWhorlOfDeathFeature = 3916,
+
+
+
         #endregion
         // ====================================================================================
         #region RED MAGE
