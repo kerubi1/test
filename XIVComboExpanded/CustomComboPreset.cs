@@ -181,6 +181,8 @@ namespace XIVComboExpandedestPlugin
         // ====================================================================================
         #region DARK KNIGHT
 
+        // unused enums: 3204
+
         [OrderedEnum]
         [CustomComboInfo("Souleater Combo", "Replace Souleater with its combo chain.", DRK.JobID, DRK.Souleater)]
         DarkSouleaterCombo = 3201,
@@ -198,10 +200,6 @@ namespace XIVComboExpandedestPlugin
         [OrderedEnum]
         [CustomComboInfo("Dark Knight Gauge Overcap Feature", "Replace AoE combo with gauge spender if you are about to overcap.", DRK.JobID, DRK.StalwartSoul)]
         DRKOvercapFeature = 3203,
-
-        [OrderedEnum]
-        [CustomComboInfo("Delirium Feature", "Replace Souleater and Stalwart Soul with Bloodspiller and Quietus when Delirium is active.", DRK.JobID, DRK.Souleater, DRK.StalwartSoul)]
-        DarkDeliriumFeature = 3204,
 
         #endregion
         // ====================================================================================
@@ -235,7 +233,7 @@ namespace XIVComboExpandedestPlugin
         GunbreakerEvilDemonSlaughterCombo = 3709,
 
         [OrderedEnum]
-        [CustomComboInfo("Fated Circle Feature", "In addition to the Demon Slaughter combo, add Fated Circle when charges are full.", GNB.JobID, GNB.DemonSlaughter)]
+        [CustomComboInfo("Fated Circle Feature", "In addition to the Demon Slaughter combo, add Fated Circle when charges are full.", GNB.JobID, GNB.DemonSlaughter, GNB.DemonSlice)]
         GunbreakerFatedCircleFeature = 3706,
 
         [OrderedEnum]
