@@ -151,7 +151,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (IsEnabled(CustomComboPreset.WHMDotMainComboFeature) && level >= 4 && level <= 45)
                 {
-                    if ((!TargetHasEffect(WHM.Debuffs.Aero) && inCombat && level >= 4 && level <= 45) || (aero1Debuff.RemainingTime <= 3 && inCombat && level >= 4 && level <= 45))
+                    if ((TargetFindOwnEffect(WHM.Debuffs.Aero) is null && inCombat && level >= 4 && level <= 45) || (aero1Debuff.RemainingTime <= 3 && inCombat && level >= 4 && level <= 45))
                     {
                         return WHM.Aero1;
                     }
@@ -159,7 +159,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (IsEnabled(CustomComboPreset.WHMDotMainComboFeature) && level >= 46 && level <= 71)
                 {
-                    if ((!TargetHasEffect(WHM.Debuffs.Aero2) && inCombat && level >= 46 && level <= 71) || (aero2Debuff.RemainingTime <= 3 && inCombat && level >= 46 && level <= 71))
+                    if ((TargetFindOwnEffect(WHM.Debuffs.Aero2) is null && level >= 46 && level <= 71) || (aero2Debuff.RemainingTime <= 3 && inCombat && level >= 46 && level <= 71))
                     {
                         return WHM.Aero2;
                     }
@@ -167,7 +167,7 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (IsEnabled(CustomComboPreset.WHMDotMainComboFeature) && level >= 72)
                 {
-                    if ((!TargetHasEffect(WHM.Debuffs.Dia) && inCombat && level >= 72) || (diaDebuff.RemainingTime <= 3 && inCombat && level >= 72))
+                    if ((TargetFindOwnEffect(WHM.Debuffs.Dia) is null && inCombat && level >= 72) || (diaDebuff.RemainingTime <= 3 && inCombat && level >= 72))
                     {
                         return WHM.Dia;
                     }

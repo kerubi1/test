@@ -157,19 +157,19 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (IsEnabled(CustomComboPreset.ASTDotMainComboFeature) && level >= 72)
                 {
-                    if ((!TargetHasEffect(AST.Debuffs.Combust3) && incombat && level >= 72) || (combust3Debuff.RemainingTime < 3 && incombat && level >= 72))
+                    if ((TargetFindOwnEffect(AST.Debuffs.Combust3) is null && incombat && level >= 72) || (combust3Debuff.RemainingTime < 3 && incombat && level >= 72))
                         return AST.Combust3;
                 }
 
                 if (IsEnabled(CustomComboPreset.ASTDotMainComboFeature) && level >= 46 && level <= 71)
                 {
-                    if ((!TargetHasEffect(AST.Debuffs.Combust2) && incombat && level >= 46 && level <= 71) || (combust2Debuff.RemainingTime < 3 && incombat && level >= 46 && level <= 71))
+                    if ((TargetFindOwnEffect(AST.Debuffs.Combust2) is null && level >= 46 && level <= 71) || (combust2Debuff.RemainingTime < 3 && incombat && level >= 46 && level <= 71))
                         return AST.Combust2;
                 }
 
                 if (IsEnabled(CustomComboPreset.ASTDotMainComboFeature) && level >= 4 && level <= 45)
                 {
-                    if ((!TargetHasEffect(AST.Debuffs.Combust1) && incombat && level >= 4 && level <= 45) || (combust1Debuff.RemainingTime < 3 && incombat && level >= 4 && level <= 45))
+                    if ((TargetFindOwnEffect(AST.Debuffs.Combust1) is null && level <= 45) || (combust1Debuff.RemainingTime < 3 && incombat && level >= 4 && level <= 45))
                         return AST.Combust1;
                 }
             }

@@ -125,19 +125,19 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (IsEnabled(CustomComboPreset.SCHDotMainComboFeature) && level >= 72)
                 {
-                    if ((!TargetHasEffect(SCH.Debuffs.Biolysis) && incombat && level >= 72) || (biolysisDebuff.RemainingTime < 3 && incombat && level >= 72))
+                    if ((TargetFindOwnEffect(SCH.Debuffs.Biolysis) is null && incombat && level >= 72) || (biolysisDebuff.RemainingTime < 3 && incombat && level >= 72))
                         return SCH.Biolysis;
                 }
 
                 if (IsEnabled(CustomComboPreset.SCHDotMainComboFeature) && level >= 26 && level <= 71)
                 {
-                    if ((!TargetHasEffect(SCH.Debuffs.Bio2) && incombat && level >= 26 && level <= 71) || (bio2Debuff.RemainingTime < 3 && incombat && level >= 26 && level <= 71))
+                    if ((TargetFindOwnEffect(SCH.Debuffs.Bio2) is null && level <= 71) || (bio2Debuff.RemainingTime < 3 && incombat && level >= 26 && level <= 71))
                         return SCH.Bio2;
                 }
 
                 if (IsEnabled(CustomComboPreset.SCHDotMainComboFeature) && level >= 2 && level <= 25)
                 {
-                    if ((!TargetHasEffect(SCH.Debuffs.Bio1) && incombat && level >= 2 && level <= 25) || (bio1Debuff.RemainingTime < 3 && incombat && level >= 2 && level <= 25))
+                    if ((TargetFindOwnEffect(SCH.Debuffs.Bio1) is null && level >= 2 && level <= 25) || (bio1Debuff.RemainingTime < 3 && incombat && level >= 2 && level <= 25))
                         return SCH.Bio1;
                 }
             }

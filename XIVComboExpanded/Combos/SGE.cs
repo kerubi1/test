@@ -152,7 +152,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 {
                     if (HasEffect(SGE.Buffs.Eukrasia))
                         return SGE.EukrasianDosis3;
-                    if ((!TargetHasEffect(SGE.Debuffs.EukrasianDosis3) && incombat && level >= 82) || (edosis3debuff.RemainingTime < 4 && incombat && level >= 82))
+                    if ((TargetFindOwnEffect(SGE.Debuffs.EukrasianDosis3) is null && incombat && level >= 82) || (edosis3debuff.RemainingTime < 4 && incombat && level >= 82))
                         return SGE.Eukrasia;
                 }
 
@@ -160,7 +160,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 {
                     if (HasEffect(SGE.Buffs.Eukrasia))
                         return SGE.EukrasianDosis2;
-                    if ((!TargetHasEffect(SGE.Debuffs.EukrasianDosis2) && incombat && level >= 72 && level <= 81) || (edosis2debuff.RemainingTime < 4 && incombat && level >= 72 && level <= 81))
+                    if ((TargetFindOwnEffect(SGE.Debuffs.EukrasianDosis2) is null && incombat && level >= 72 && level <= 81) || (edosis2debuff.RemainingTime < 4 && incombat && level >= 72 && level <= 81))
                         return SGE.Eukrasia;
                 }
 
@@ -168,7 +168,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 {
                     if (HasEffect(SGE.Buffs.Eukrasia))
                         return SGE.EukrasianDosis1;
-                    if ((!TargetHasEffect(SGE.Debuffs.EukrasianDosis1) && incombat && level >= 30 && level <= 71) || (edosis1debuff.RemainingTime < 4 && incombat && level >= 30 && level <= 71))
+                    if ((TargetFindOwnEffect(SGE.Debuffs.EukrasianDosis1) is null && incombat && level >= 30 && level <= 71) || (edosis1debuff.RemainingTime < 4 && incombat && level >= 30 && level <= 71))
                         return SGE.Eukrasia;
                 }
             }
