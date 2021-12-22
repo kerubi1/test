@@ -67,18 +67,25 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == WAR.StormsPath)
             {
-                if (IsEnabled(CustomComboPreset.WarriorInnerReleaseFeature) && HasEffect(WAR.Buffs.InnerRelease))
-                {
-                    return OriginalHook(WAR.FellCleave);
-                }
-
+                var heavyswingCD = GetCooldown(WAR.HeavySwing);
+                var upheavalCD = GetCooldown(WAR.Upheaval);
+                var innerreleaseCD = GetCooldown(WAR.InnerRelease);
+                var beserkCD = GetCooldown(WAR.Berserk);
+                var stormseyeBuff = FindEffectAny(WAR.Buffs.SurgingTempest);
+                var innerReleaseBuff = HasEffect(WAR.Buffs.InnerRelease);
                 if (comboTime > 0)
                 {
+                    var gauge = GetJobGauge<WARGauge>().BeastGauge;
+                    if (lastComboMove == WAR.Maim && level >= 50 && !HasEffectAny(WAR.Buffs.SurgingTempest))
+                        return WAR.StormsEye;
                     if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
                         return WAR.Maim;
-
                     if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
+                    {
+                        if (stormseyeBuff.RemainingTime < 10 && IsEnabled(CustomComboPreset.WarriorStormsEyeCombo) && level >= 50)
+                            return WAR.StormsEye;
                         return WAR.StormsPath;
+                    }
                 }
 
                 return WAR.HeavySwing;
@@ -212,43 +219,6 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (HasEffect(WAR.Buffs.PrimalRendReady))
                 return WAR.PrimalRend;
-
-            return actionID;
-        }
-    }
-
-    // Replace Storm's Path with Storm's Path combo and overcap feature on main combo to fellcleave
-    internal class WarriorStormsDotCombo : CustomCombo
-    {
-        protected override CustomComboPreset Preset => CustomComboPreset.WarriorStormsDotCombo;
-
-        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-        {
-            if (actionID == WAR.StormsPath)
-            {
-                var heavyswingCD = GetCooldown(WAR.HeavySwing);
-                var upheavalCD = GetCooldown(WAR.Upheaval);
-                var innerreleaseCD = GetCooldown(WAR.InnerRelease);
-                var beserkCD = GetCooldown(WAR.Berserk);
-                var stormseyeBuff = FindEffectAny(WAR.Buffs.SurgingTempest);
-                var innerReleaseBuff = HasEffect(WAR.Buffs.InnerRelease);
-                if (comboTime > 0)
-                {
-                    var gauge = GetJobGauge<WARGauge>().BeastGauge;
-                    if (lastComboMove == WAR.Maim && level >= 50 && !HasEffectAny(WAR.Buffs.SurgingTempest))
-                        return WAR.StormsEye;
-                    if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
-                        return WAR.Maim;
-                    if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
-                    {
-                        if (stormseyeBuff.RemainingTime < 10 && IsEnabled(CustomComboPreset.WarriorStormsEyeCombo) && level >= 50)
-                            return WAR.StormsEye;
-                        return WAR.StormsPath;
-                    }
-                }
-
-                return WAR.HeavySwing;
-            }
 
             return actionID;
         }

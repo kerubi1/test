@@ -55,6 +55,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 Bloodfest = 76,
                 EnhancedContinuation = 86,
                 CartridgeCharge2 = 88,
+                BurstStrike = 30,
                 DoubleDown = 90;
         }
     }
@@ -69,9 +70,17 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 if (comboTime > 0)
                 {
+                    var gauge = GetJobGauge<GNBGauge>();
+                    var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
+
                     if (lastComboMove == GNB.KeenEdge && level >= GNB.Levels.BrutalShell)
                         return GNB.BrutalShell;
-
+                    if (lastComboMove == GNB.BrutalShell && level >= 88 && gauge.Ammo == 3 && IsEnabled(CustomComboPreset.GunbreakerOvercapFeature))
+                        return GNB.BurstStrike;
+                    if (lastComboMove == GNB.BrutalShell && level <= 87 && gauge.Ammo == 2 && IsEnabled(CustomComboPreset.GunbreakerOvercapFeature))
+                        return GNB.BurstStrike;
+                    if (lastComboMove == GNB.BrutalShell && HasEffectAny(GNB.Buffs.ReadyToBlast) && level >= GNB.Levels.EnhancedContinuation && IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
+                        return GNB.Hypervelocity;
                     if (lastComboMove == GNB.BrutalShell && level >= GNB.Levels.SolidBarrel)
                         return GNB.SolidBarrel;
                 }

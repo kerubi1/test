@@ -244,6 +244,11 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("No Mercy Feature", "Replace No Mercy with Bow Shock, and then Sonic Break, while No Mercy is active.", GNB.JobID, GNB.NoMercy)]
         GunbreakerNoMercyFeature = 3708,
 
+        [OrderedEnum]
+        [ParentCombo(GunbreakerSolidBarrelCombo)]
+        [CustomComboInfo("Cartridge Overcap Feature", "Replace ST Chain with Burst strike and its combo if about to overcap.", GNB.JobID, GNB.SolidBarrel)]
+        GunbreakerOvercapFeature = 3710,
+
         #endregion
         // ====================================================================================
         #region MACHINIST
@@ -791,12 +796,8 @@ namespace XIVComboExpandedestPlugin
         WarriorPrimalRendFeature = 2108,
 
         [OrderedEnum]
-        [CustomComboInfo("Storms Dot Combo", "AIO Single Target Combo with Storms Eye at a 10 sec refresh", WAR.JobID, WAR.StormsPath)]
-        WarriorStormsDotCombo = 2109,
-
-        [OrderedEnum]
         [CustomComboInfo("Mythril Rend Feature", "Replace your AoE combos of choice with Primal Rend when available.", WAR.JobID, WAR.MythrilTempest)]
-        WarriorMythrilRendFeature = 2110,
+        WarriorMythrilRendFeature = 2109,
 
         #endregion
         // ====================================================================================
