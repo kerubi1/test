@@ -434,6 +434,18 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Confiteor Feature", "Replace Holy Spirit/Circle with Confiteor when Requiescat has one stack left. Includes Confiteor combo.", PLD.JobID, PLD.HolySpirit, PLD.HolyCircle)]
         PaladinConfiteorFeature = 1906,
 
+        [OrderedEnum]
+        [CustomComboInfo("Requiescat Feature", "Replace Royal Authority/Goring Blade combo with Holy Spirit and Prominence combo with Holy Circle while Requiescat is active \n And when Fight Or Flight is not Active.\nRequires said combos to be activated to work.", PLD.JobID, PLD.RoyalAuthority, PLD.GoringBlade, PLD.Prominence)]
+        PaladinRequiescatFeature = 1908,
+
+        [OrderedEnum]
+        [CustomComboInfo("Royal Goring Option", "Insert Goring Blade into the main combo when appropriate.\nRequires Royal Authority Combo", PLD.JobID, PLD.RoyalAuthority, PLD.GoringBlade)]
+        PaladinRoyalGoringOption = 1909,
+
+        [OrderedEnum]
+        [CustomComboInfo("Scornful Spirits Feature", "Replace Spirits Within and Circle of Scorn with whichever is available soonest.", PLD.JobID, PLD.CircleOfScorn, PLD.SpiritsWithin, PLD.Expiacion)]
+        PaladinScornfulSpiritsFeature = 1910,
+
         #endregion
         // ====================================================================================
         #region REAPER
@@ -509,8 +521,6 @@ namespace XIVComboExpandedestPlugin
         [ParentCombo(ReaperGibbetGallowsFeature)]
         [CustomComboInfo("Reaper AoE Buff Combo", "When Gluttony is off-cooldown, Grim Swathe will turn into Gluttony.", RPR.JobID, RPR.SpinningScythe)]
         ReaperWhorlOfDeathFeature = 3916,
-
-
 
         #endregion
         // ====================================================================================
@@ -764,7 +774,7 @@ namespace XIVComboExpandedestPlugin
         #region WARRIOR
 
         [OrderedEnum]
-        [CustomComboInfo("Storms Path Combo", "Replace Storms Path with its combo chain", WAR.JobID, WAR.StormsPath)]
+        [CustomComboInfo("Storms Path Combo", "Replace Storms Path with its combo chain including Storms Eye refresh. \n Needs Storms Eye Combo active to refresh.", WAR.JobID, WAR.StormsPath)]
         WarriorStormsPathCombo = 2101,
 
         [OrderedEnum]
