@@ -82,7 +82,7 @@ namespace XIVComboExpandedestPlugin.Combos
                         return WAR.Maim;
                     if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
                     {
-                        if (stormseyeBuff.RemainingTime < 10 && IsEnabled(CustomComboPreset.WarriorStormsEyeCombo) && level >= 50)
+                        if (stormseyeBuff.RemainingTime < 7 && IsEnabled(CustomComboPreset.WarriorStormsEyeCombo) && level >= 50)
                             return WAR.StormsEye;
                         return WAR.StormsPath;
                     }
