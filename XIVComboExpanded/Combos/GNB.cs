@@ -71,7 +71,6 @@ namespace XIVComboExpandedestPlugin.Combos
                 if (comboTime > 0)
                 {
                     var gauge = GetJobGauge<GNBGauge>();
-                    var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
 
                     if (lastComboMove == GNB.KeenEdge && level >= GNB.Levels.BrutalShell)
                         return GNB.BrutalShell;
