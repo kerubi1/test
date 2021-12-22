@@ -794,6 +794,10 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Storms Dot Combo", "AIO Single Target Combo with Storms Eye at a 10 sec refresh", WAR.JobID, WAR.StormsPath)]
         WarriorStormsDotCombo = 2109,
 
+        [OrderedEnum]
+        [CustomComboInfo("Mythril Rend Feature", "Replace your AoE combos of choice with Primal Rend when available.", WAR.JobID, WAR.MythrilTempest)]
+        WarriorMythrilRendFeature = 2110,
+
         #endregion
         // ====================================================================================
         #region WHITE MAGE

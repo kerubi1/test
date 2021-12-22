@@ -125,6 +125,9 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == WAR.MythrilTempest)
             {
+                if (HasEffect(WAR.Buffs.PrimalRendReady) && IsEnabled(CustomComboPreset.WarriorMythrilRendFeature))
+                    return WAR.PrimalRend;
+
                 if (IsEnabled(CustomComboPreset.WarriorInnerReleaseFeature) && HasEffect(WAR.Buffs.InnerRelease))
                 {
                     return OriginalHook(WAR.Decimate);
@@ -157,6 +160,9 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == WAR.Overpower)
             {
+                if (HasEffect(WAR.Buffs.PrimalRendReady) && IsEnabled(CustomComboPreset.WarriorMythrilRendFeature))
+                    return WAR.PrimalRend;
+
                 if (IsEnabled(CustomComboPreset.WarriorInnerReleaseFeature) && HasEffect(WAR.Buffs.InnerRelease))
                 {
                     return OriginalHook(WAR.Decimate);
