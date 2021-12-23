@@ -10,6 +10,8 @@ namespace XIVComboExpandedestPlugin.Combos
         public const uint
             HardSlash = 3617,
             Unleash = 3621,
+            BloodWeapon = 3625,
+            CarveAndSpit = 3643,
             SyphonStrike = 3623,
             Souleater = 3632,
             Quietus = 7391,
@@ -19,6 +21,7 @@ namespace XIVComboExpandedestPlugin.Combos
             StalwartSoul = 16468,
             FloodOfShadow = 16469,
             EdgeOfShadow = 16470,
+            LivingShadow = 16472,
             Shadowbringer = 25757;
 
         public static class Buffs
@@ -40,11 +43,13 @@ namespace XIVComboExpandedestPlugin.Combos
                 Souleater = 26,
                 FloodOfDarkness = 30,
                 EdgeOfDarkness = 40,
+                CarveAndSpit = 60,
                 Bloodpiller = 62,
                 Quietus = 64,
                 Delirium = 68,
                 StalwartSoul = 72,
-                Shadow = 74;
+                Shadow = 74,
+                LivingShadow = 80;
         }
     }
 
@@ -96,6 +101,33 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 return DRK.Unleash;
             }
+
+            return actionID;
+        }
+    }
+
+    internal class DarkBloodWeaponFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.DarkBloodWeaponFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (IsActionOffCooldown(DRK.BloodWeapon) || level < DRK.Levels.CarveAndSpit)
+                return DRK.BloodWeapon;
+
+            return actionID;
+        }
+    }
+
+    internal class DarkLivingShadowFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.DarkLivingShadowFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            var gauge = GetJobGauge<DRKGauge>();
+            if (IsActionOffCooldown(DRK.LivingShadow) && level >= DRK.Levels.LivingShadow && gauge.Blood >= 50)
+                return DRK.LivingShadow;
 
             return actionID;
         }

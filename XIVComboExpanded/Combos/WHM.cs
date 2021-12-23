@@ -11,6 +11,8 @@ namespace XIVComboExpandedestPlugin.Combos
             Cure = 120,
             Medica = 124,
             Cure2 = 135,
+            Holy = 139,
+            Holyga = 25860,
             AfflatusSolace = 16531,
             AfflatusRapture = 16534,
             AfflatusMisery = 16535,
@@ -86,6 +88,21 @@ namespace XIVComboExpandedestPlugin.Combos
                 if (gauge.BloodLily == 3)
                     return WHM.AfflatusMisery;
             }
+
+            return actionID;
+        }
+    }
+
+    internal class WhiteMageHolyMiseryFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.WhiteMageHolyMiseryFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            var gauge = GetJobGauge<WHMGauge>();
+
+            if (gauge.BloodLily == 3)
+                return WHM.AfflatusMisery;
 
             return actionID;
         }

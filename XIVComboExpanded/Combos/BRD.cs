@@ -61,7 +61,8 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == BRD.WanderersMinuet)
             {
-                if (HasEffect(BRD.Buffs.WanderersMinuet))
+                var gauge = GetJobGauge<BRDGauge>();
+                if (gauge.Song == Song.WANDERER)
                     return BRD.PitchPerfect;
             }
 
